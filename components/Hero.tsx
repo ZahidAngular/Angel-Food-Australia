@@ -17,7 +17,7 @@ export function Hero() {
     <section
       ref={ref}
       id="top"
-      className="relative h-[100svh] min-h-[640px] w-full overflow-hidden bg-ink"
+      className="relative h-[92svh] min-h-[600px] w-full overflow-hidden bg-ink sm:h-[100svh] sm:min-h-[640px]"
     >
       {/* full-bleed photo with slow zoom */}
       <motion.div
@@ -39,7 +39,7 @@ export function Hero() {
 
       <motion.div
         style={{ y: yText, opacity }}
-        className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-end px-5 pb-16 sm:px-8 sm:pb-20"
+        className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-end px-5 pb-10 sm:px-8 sm:pb-20"
       >
         <motion.div
           initial={{ opacity: 0, y: 16 }}

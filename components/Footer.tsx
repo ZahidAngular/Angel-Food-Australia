@@ -88,7 +88,7 @@ export function Footer() {
         {/* footer body */}
         <div className="grid gap-10 py-16 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
-            <Logo color="var(--color-fg)" markColor="#e7b64a" />
+            <Logo tone="auto" className="h-20" />
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-muted">
               Premium dairy-free cheeses and plant-based meats — crafted for
               taste, texture and performance across Australia.

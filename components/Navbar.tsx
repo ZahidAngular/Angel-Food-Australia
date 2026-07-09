@@ -36,7 +36,7 @@ export function Navbar() {
         initial={{ y: -110 }}
         animate={{ y: 0 }}
         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-        className="fixed inset-x-0 top-0 z-50"
+        className="fixed left-0 top-0 z-50 w-[100vw]"
       >
         {/* scroll progress hairline */}
         <motion.div
@@ -55,10 +55,7 @@ export function Navbar() {
             {/* left: logo + live status */}
             <div className="flex items-center gap-4">
               <a href="#top">
-                <Logo
-                  color={light ? "#fbf8f0" : "var(--color-fg)"}
-                  markColor="#e7b64a"
-                />
+                <Logo tone={light ? "light" : "auto"} className="h-14 sm:h-16" />
               </a>
               <span
                 className={`hidden items-center gap-2 border-l pl-4 text-[0.65rem] font-semibold uppercase tracking-[0.2em] lg:flex ${
@@ -159,10 +156,10 @@ export function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-[60] flex flex-col bg-olive px-6 py-6 text-paper md:hidden"
+            className="fixed left-0 top-0 z-[60] flex w-[100vw] h-[100vh] flex-col bg-olive px-6 py-6 text-paper md:hidden"
           >
             <div className="flex items-center justify-between">
-              <Logo color="#fbf8f0" markColor="#e7b64a" />
+              <Logo tone="light" className="h-14" />
               <button
                 aria-label="Close menu"
                 onClick={() => setOpen(false)}
