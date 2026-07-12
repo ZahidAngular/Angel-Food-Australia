@@ -7,6 +7,7 @@ import {
 } from "framer-motion";
 import { Logo } from "./Logo";
 import { ThemeToggle } from "./ThemeToggle";
+import { useContactModal } from "./ContactModalProvider";
 
 const links = [
   { label: "Cheese", href: "#cheese" },
@@ -20,6 +21,7 @@ export function Navbar() {
   const [hovered, setHovered] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
   const { scrollYProgress } = useScroll();
+  const { openModal } = useContactModal();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -108,8 +110,8 @@ export function Navbar() {
             {/* right: theme toggle + CTA + mobile toggle */}
             <div className="flex items-center gap-2">
               <ThemeToggle light={light} />
-              <a
-                href="#contact"
+              <button
+                onClick={openModal}
                 className={`group hidden items-center gap-2 rounded-full py-2 pl-5 pr-2 text-sm font-semibold transition-colors sm:flex ${
                   scrolled
                     ? "bg-fg text-bg hover:bg-terracotta hover:text-paper"
@@ -128,7 +130,7 @@ export function Navbar() {
                     />
                   </svg>
                 </span>
-              </a>
+              </button>
 
               {/* mobile menu button */}
               <button
@@ -170,29 +172,47 @@ export function Navbar() {
             </div>
 
             <ul className="flex flex-1 flex-col justify-center gap-1">
-              {[...links, { label: "Work With Us", href: "#contact" }].map(
-                (l, i) => (
-                  <motion.li
-                    key={l.href}
-                    initial={{ opacity: 0, y: 24 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                      delay: 0.12 + i * 0.07,
-                      duration: 0.6,
-                      ease: [0.16, 1, 0.3, 1],
-                    }}
+              {links.map((l, i) => (
+                <motion.li
+                  key={l.href}
+                  initial={{ opacity: 0, y: 24 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    delay: 0.12 + i * 0.07,
+                    duration: 0.6,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                >
+                  <a
+                    href={l.href}
+                    onClick={() => setOpen(false)}
+                    className="display flex items-center justify-between border-b border-paper/15 py-4 text-4xl text-paper transition-colors hover:text-cheese"
                   >
-                    <a
-                      href={l.href}
-                      onClick={() => setOpen(false)}
-                      className="display flex items-center justify-between border-b border-paper/15 py-4 text-4xl text-paper transition-colors hover:text-cheese"
-                    >
-                      {l.label}
-                      <span className="text-lg text-cheese">↗</span>
-                    </a>
-                  </motion.li>
-                )
-              )}
+                    {l.label}
+                    <span className="text-lg text-cheese">↗</span>
+                  </a>
+                </motion.li>
+              ))}
+              <motion.li
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  delay: 0.12 + links.length * 0.07,
+                  duration: 0.6,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+              >
+                <button
+                  onClick={() => {
+                    setOpen(false);
+                    openModal();
+                  }}
+                  className="display flex w-full items-center justify-between border-b border-paper/15 py-4 text-4xl text-paper transition-colors hover:text-cheese"
+                >
+                  Work With Us
+                  <span className="text-lg text-cheese">↗</span>
+                </button>
+              </motion.li>
             </ul>
 
             <div className="pt-6 text-sm text-paper/60">

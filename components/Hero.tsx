@@ -1,9 +1,11 @@
 "use client";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { useContactModal } from "./ContactModalProvider";
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
+  const { openModal } = useContactModal();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
@@ -79,12 +81,12 @@ export function Hero() {
                 →
               </span>
             </a>
-            <a
-              href="#contact"
+            <button
+              onClick={openModal}
               className="inline-flex items-center gap-2 rounded-full border border-paper/30 px-7 py-3.5 text-sm font-semibold text-paper backdrop-blur transition-colors hover:border-paper"
             >
               For Retailers & Cafés
-            </a>
+            </button>
           </div>
         </motion.div>
       </motion.div>

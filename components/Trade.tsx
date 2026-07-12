@@ -1,5 +1,6 @@
 "use client";
 import { Reveal } from "./Reveal";
+import { useContactModal } from "./ContactModalProvider";
 
 const cards = [
   {
@@ -19,6 +20,7 @@ const cards = [
 ];
 
 export function Trade() {
+  const { openModal } = useContactModal();
   return (
     <section id="trade" className="themed-surface bg-bg px-5 pb-24 pt-4 sm:px-8 sm:pb-32">
       <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-2">
@@ -45,12 +47,12 @@ export function Trade() {
                 <p className="mt-4 max-w-md text-sm leading-relaxed text-paper/80">
                   {c.body}
                 </p>
-                <a
-                  href="#contact"
+                <button
+                  onClick={openModal}
                   className="mt-7 inline-flex w-fit items-center gap-2 rounded-full border border-paper/40 px-6 py-3 text-sm font-semibold transition-colors hover:bg-paper hover:text-ink"
                 >
                   Enquire now →
-                </a>
+                </button>
               </div>
             </div>
           </Reveal>

@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Reveal, RevealWords } from "./Reveal";
 import { Logo } from "./Logo";
+import { useContactModal } from "./ContactModalProvider";
 
 const columns = [
   {
@@ -18,7 +19,7 @@ const columns = [
     links: [
       { label: "Retailers", href: "#trade" },
       { label: "Foodservice", href: "#trade" },
-      { label: "Work With Us", href: "#contact" },
+      { label: "Work With Us", href: "__modal__" },
     ],
   },
   {
@@ -31,6 +32,7 @@ const columns = [
 ];
 
 export function Footer() {
+  const { openModal } = useContactModal();
   const cardRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: cardRef,
@@ -66,21 +68,27 @@ export function Footer() {
             Whether you&apos;re a supermarket, distributor, wholesaler, café or
             restaurant — we&apos;d love to hear from you. Join us.
           </p>
-          <div className="mt-10 flex flex-wrap gap-4">
-            <a
-              href="mailto:hello@angelfood.com.au"
+          <div className="mt-10 flex flex-wrap items-center gap-4">
+            <button
+              onClick={openModal}
               className="group inline-flex items-center gap-2 rounded-full bg-paper px-7 py-4 text-sm font-semibold text-ink transition-transform hover:-translate-y-0.5"
             >
-              hello@angelfood.com.au
+              Send a Message
               <span className="transition-transform group-hover:translate-x-1">
                 →
               </span>
-            </a>
+            </button>
             <a
               href="#top"
               className="rounded-full border border-paper/40 px-7 py-4 text-sm font-semibold text-paper transition-colors hover:border-paper"
             >
               Back to top ↑
+            </a>
+            <a
+              href="mailto:hello@angelfood.com.au"
+              className="text-sm font-medium text-paper/75 underline decoration-paper/30 underline-offset-4 transition-colors hover:text-paper"
+            >
+              hello@angelfood.com.au
             </a>
           </div>
         </motion.div>
@@ -102,12 +110,21 @@ export function Footer() {
               <ul className="flex flex-col gap-2.5 text-sm text-fg">
                 {col.links.map((l) => (
                   <li key={l.label}>
-                    <a
-                      href={l.href}
-                      className="transition-colors hover:text-terracotta"
-                    >
-                      {l.label}
-                    </a>
+                    {l.href === "__modal__" ? (
+                      <button
+                        onClick={openModal}
+                        className="transition-colors hover:text-terracotta"
+                      >
+                        {l.label}
+                      </button>
+                    ) : (
+                      <a
+                        href={l.href}
+                        className="transition-colors hover:text-terracotta"
+                      >
+                        {l.label}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Bricolage_Grotesque, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { SmoothScroll } from "@/components/SmoothScroll";
+import { ContactModalProvider } from "@/components/ContactModalProvider";
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -36,7 +37,9 @@ export default function RootLayout({
         />
       </head>
       <body className="grain">
-        <SmoothScroll>{children}</SmoothScroll>
+        <SmoothScroll>
+          <ContactModalProvider>{children}</ContactModalProvider>
+        </SmoothScroll>
       </body>
     </html>
   );
